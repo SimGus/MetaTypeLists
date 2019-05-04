@@ -15,5 +15,7 @@ int main()
 
     printHead(test);
 
+    /* forEach(test, &printHead); */
+
     return EXIT_SUCCESS;
 }

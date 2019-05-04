@@ -22,13 +22,6 @@
 
 using namespace std;
 
-// Print utility
-template<typename T>
-void printValue(T value)
-{
-    cout << value << endl;
-}
-
 // List definition
 struct nil {};
 template<typename Head, typename Tail>
@@ -50,3 +43,14 @@ template<> struct buildTypes<> {using type = nil;};
 template<typename... Types>
 using buildTList = typename buildTypes<Types...>::type;
 
+// Print utility
+template<typename H, typename... Ts>
+void printHead(TList<H, Ts...> l)
+{
+    cout << l.head << " ";
+}
+template<typename H>
+void printHead(TList<H, nil> l)
+{
+    cout << endl;
+}

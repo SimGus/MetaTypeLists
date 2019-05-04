@@ -13,5 +13,7 @@ int main()
     cout << "Head: " << test.head
          << "\nTail: " << test.tail.head << endl;
 
+    printHead(test);
+
     return EXIT_SUCCESS;
 }

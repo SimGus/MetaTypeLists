@@ -373,3 +373,19 @@ struct ElemIndex<nil, E>
     static constexpr int value = 0;
 };
 
+//+============= Generic functions on the concrete values in the lists ===============
+template<typename... Types> buildTList<Types...> createList(Types... values)
+{
+    buildTList<Types...> l;
+    populate(l, values...);
+    return l;
+}
+
+template<typename H, typename... Ts>
+void populate(buildTList<H, Ts...> l, H value, Ts... values)
+{
+    l.head = value;
+    if constexpr (sizeof...(values) > 0)
+        populate(l.tail, values...);
+}
+

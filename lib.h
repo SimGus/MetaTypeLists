@@ -45,3 +45,16 @@ template<> struct buildTypes<> {using type = nil;};
 template<typename... Types>
 using buildTList = typename buildTypes<Types...>::type;
 
+// Get the type of the head of the list
+template<typename...> struct Head;
+template<typename H, typename T>
+struct Head<TList<H, T>>
+{
+    using value = H;
+};
+template<> struct Head<nil>
+{
+    using value = nil;
+};
+
+

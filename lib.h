@@ -124,7 +124,7 @@ struct Length<nil>
 // Concatenates two lists
 template<typename...> struct Concat;
 template<typename H1, typename T1, typename H2, typename T2>
-struct Concat<TList<H1, T1>, TList<H2, T2>> 
+struct Concat<TList<H1, T1>, TList<H2, T2>>
 {
     using type = TList<H1, typename Concat<T1, TList<H2, T2>>::type>;
 };
@@ -226,26 +226,27 @@ struct Prepend<nil, E>
     using type = TList<E, nil>;
 };
 
-// Special `Prepend` to use with `Map`
-template<typename> struct PrependForMap;
-template<typename E>
-struct PrependForMap
-{
-    template<typename L>
-    struct lambda
-    {
-        using type = Prepend<L, E>;
-    };
-};
+/* // Special `Prepend` to use with `Map` */
+/* template<typename> struct PrependForMap; */
+/* template<typename E> */
+/* struct PrependForMap */
+/* { */
+/*     template<typename L> */
+/*     struct lambda */
+/*     { */
+/*         using type = Prepend<L, E>; */
+/*     }; */
+/* }; */
 
-// Computes all the subsequences of the provided list
+/* // Computes all the subsequences of the provided list */
 /* template<typename...> struct Subsequences; */
 /* template<typename H, typename T> */
 /* struct Subsequences<TList<H, T>> */
 /* { */
 /*     using enumeration = TList<TList<H, nil>, */
 /*                               TList<typename Subsequences<T>::enumeration, */
-/*                                     typename Map<PrependForMap<H>::lambda, typename Subsequences<T>::enumeration>>; */
+/*                                     typename Map<PrependForMap<H>::lambda, typename Subsequences<T>::enumeration>::type>>; */
+/*     // This doesn't work because of `H` in the last line for some reason */
 /* }; */
 /* template<> */
 /* struct Subsequences<nil> */

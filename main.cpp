@@ -8,7 +8,8 @@ int main()
 {
     using test = buildTList<int, char, double>;
     using test2 = buildTList<double, char, float>;
-    debug<Map<PrependForMap<int>::lambda, test>::type> d;
+    debug<Subsequences<test>::enumeration> d;
+    /* debug<Map<PrependForMap<int>::lambda, test>::type> d; */
     
     cout << "<int, char, double> length? " << Length<test>::value << endl;
     cout << "<> empty? " << Length<buildTList<>>::value << endl;

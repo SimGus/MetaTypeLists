@@ -1,11 +1,9 @@
-# Template list library
+# Template type list library
 
-This project contains an implementation of a library to deal with lists of arguments in C++.
-A certain number of meta-functions are defined to deal with variadic argument lists,
-which are thus seen as lists.
+This project contains an implementation of a library to deal with lists of types in C++.
+Type lists are defined in a "nested style" and meta-functions to handle them and make predicates about them are contained there as well.
 
-Note that the meta-functions defined here are heavily inspired by the ones that are present
-in the standard library of the Haskell programming language.
+Note that those meta-functions are heavily inspired by the ones that are present in the standard library of the Haskell programming language.
 
-*This project is more intended to be an exercise about template metaprogramming than a real
-attempt at a library.*
+*This project is more intended to be an exercise about template metaprogramming than a real attempt at a library.*
+

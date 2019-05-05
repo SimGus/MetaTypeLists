@@ -57,4 +57,16 @@ template<> struct Head<nil>
     using value = nil;
 };
 
+// Get the type of the tail of the list
+template<typename...> struct Tail;
+template<typename H, typename T>
+struct Tail<TList<H, T>>
+{
+    using value = T;
+};
+template<> struct Tail<nil>
+{
+    using value = nil;
+};
+
 

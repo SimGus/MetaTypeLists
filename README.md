@@ -7,3 +7,15 @@ Note that those meta-functions are heavily inspired by the ones that are present
 
 *This project is more intended to be an exercise about template metaprogramming than a real attempt at a library.*
 
+## Execute
+**Compile**
+```sh
+g++ -std=c++17 main.cpp -o main
+```
+
+**Run**
+```sh
+./main
+```
+```
+

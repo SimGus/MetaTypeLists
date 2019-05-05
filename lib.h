@@ -121,4 +121,16 @@ struct Length<nil>
     static constexpr unsigned int value = 0;
 };
 
+// Appends two lists
+template<typename...> struct Append;
+template<typename H1, typename T1, typename H2, typename T2>
+struct Append<TList<H1, T1>, TList<H2, T2>> 
+{
+    using type = TList<H1, typename Append<T1, TList<H2, T2>>::type>;
+};
+template<typename H, typename T>
+struct Append<nil, TList<H, T>>
+{
+    using type = TList<H, T>;
+};
 

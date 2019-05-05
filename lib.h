@@ -95,3 +95,16 @@ struct Init<TList<H, nil>>
     using type = nil;
 };
 
+// Tests whether the list is empty
+template<typename...> struct IsEmpty;
+template<typename H, typename T>
+struct IsEmpty<TList<H, T>>
+{
+    static constexpr bool ans = false;
+};
+template<>
+struct IsEmpty<nil>
+{
+    static constexpr bool ans = true;
+};
+

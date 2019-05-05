@@ -121,16 +121,42 @@ struct Length<nil>
     static constexpr unsigned int value = 0;
 };
 
-// Appends two lists
-template<typename...> struct Append;
+// Concatenates two lists
+template<typename...> struct Concat;
 template<typename H1, typename T1, typename H2, typename T2>
-struct Append<TList<H1, T1>, TList<H2, T2>> 
+struct Concat<TList<H1, T1>, TList<H2, T2>> 
 {
-    using type = TList<H1, typename Append<T1, TList<H2, T2>>::type>;
+    using type = TList<H1, typename Concat<T1, TList<H2, T2>>::type>;
 };
 template<typename H, typename T>
-struct Append<nil, TList<H, T>>
+struct Concat<nil, TList<H, T>>
 {
     using type = TList<H, T>;
 };
+
+// Appends an element to a list
+template<typename...> struct Append;
+template<typename H, typename T, typename E>
+struct Append<TList<H, T>, E>
+{
+    using type = TList<H, typename Append<T, E>::type>;
+};
+template<typename E>
+struct Append<nil, E>
+{
+    using type = TList<E, nil>;
+};
+
+// Reverse the order of the list
+/* template<typename...> struct Reverse; */
+/* template<typename H, typename T> */
+/* struct Reverse<TList<H, T>> */
+/* { */
+/*     using type = */ 
+/* }; */
+/* template<typename H> */
+/* struct Reverse<TList<H, nil>> */
+/* { */
+/*     using type = TList<H, nil>; */
+/* }; */
 

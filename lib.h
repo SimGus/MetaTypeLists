@@ -213,11 +213,43 @@ struct Transpose<nil, nil>
     using type = nil;
 };
 
+// Prepends an element to a list
+template<typename...> struct Prepend;
+template<typename H, typename T, typename E>
+struct Prepend<TList<H, T>, E>
+{
+    using type = TList<E, TList<H, T>>;
+};
+template<typename E>
+struct Prepend<nil, E>
+{
+    using type = TList<E, nil>;
+};
+
+// Special `Prepend` to use with `Map`
+template<typename> struct PrependForMap;
+template<typename E>
+struct PrependForMap
+{
+    template<typename L>
+    struct lambda
+    {
+        using type = Prepend<L, E>;
+    };
+};
+
 // Computes all the subsequences of the provided list
 /* template<typename...> struct Subsequences; */
 /* template<typename H, typename T> */
 /* struct Subsequences<TList<H, T>> */
 /* { */
-/*     using enumeration = TList<TList<H, nil>, TList< */
-/* } */
+/*     using enumeration = TList<TList<H, nil>, */
+/*                               TList<typename Subsequences<T>::enumeration, */
+/*                                     typename Map<PrependForMap<H>::lambda, typename Subsequences<T>::enumeration>>; */
+/* }; */
+/* template<> */
+/* struct Subsequences<nil> */
+/* { */
+/*     using enumeration = nil; */
+/* }; */
 

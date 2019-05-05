@@ -82,4 +82,16 @@ struct Last<TList<H, nil>>
     using type = H;
 };
 
+// Get the list of elements except the last one
+template<typename...> struct Init;
+template<typename H, typename T>
+struct Init<TList<H, T>>
+{
+    using type = TList<H, typename Init<T>::type>;
+};
+template<typename H>
+struct Init<TList<H, nil>>
+{
+    using type = nil;
+};
 

@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     using test = buildTList<int, char, double>;
-    debug<Last<test>::type> d;
+    debug<Init<test>::type> d;
 
     return EXIT_SUCCESS;
 }

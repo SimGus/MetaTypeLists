@@ -318,4 +318,21 @@ struct Find<nil, E>
     using type = nil;
 };
 
-
+// Computes the first index of a provided type
+// (the size of the list if it isn't present in the list)
+template<typename...> struct ElemIndex;
+template<typename H, typename T>
+struct ElemIndex<TList<H, T>, H>
+{
+    static constexpr int value = 0;
+};
+template<typename H, typename T, typename E>
+struct ElemIndex<TList<H, T>, E>
+{
+    static constexpr int value = 1 + ElemIndex<T, E>::value;
+};
+template<typename E>
+struct ElemIndex<nil, E>
+{
+    static constexpr int value = 0;
+};

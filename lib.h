@@ -147,6 +147,33 @@ struct Append<nil, E>
     using type = TList<E, nil>;
 };
 
+// Creates a list obtained by applying a metafunction to all elements of the list
+template<template<typename...> typename, typename...> struct Map;
+template<template<typename...> typename f, typename H, typename T>
+struct Map<f, TList<H, T>>
+{
+    using type = TList<typename f<H>::type, typename Map<f, T>::type>;
+};
+template<template<typename...> typename f>
+struct Map<f, nil>
+{
+    using type = nil;
+};
+
+// Returns the same type as was provided
+template<typename> struct Identity;
+template<typename T> struct Identity
+{
+    using type = T;
+};
+
+// Returns `int` whichever the pvided type
+template<typename> struct Int;
+template<typename T> struct Int
+{
+    using type = int;
+};
+
 // Reverse the order of the list
 template<typename...> struct Reverse;
 template<typename H, typename T>
@@ -185,4 +212,12 @@ struct Transpose<nil, nil>
 {
     using type = nil;
 };
+
+// Computes all the subsequences of the provided list
+/* template<typename...> struct Subsequences; */
+/* template<typename H, typename T> */
+/* struct Subsequences<TList<H, T>> */
+/* { */
+/*     using enumeration = TList<TList<H, nil>, TList< */
+/* } */
 

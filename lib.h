@@ -97,6 +97,42 @@ struct Init<TList<H, nil>>
     using type = nil;
 };
 
+// Get the list of elements after index `n` (included)
+template<int, typename...> struct AfterIndex;
+template<int n, typename H, typename T>
+struct AfterIndex<n, TList<H, T>>
+{
+    using type = typename AfterIndex<n-1, T>::type;
+};
+template<typename H, typename T>
+struct AfterIndex<0, TList<H, T>>
+{
+    using type = TList<H, T>;
+};
+template<int n>
+struct AfterIndex<n, nil>
+{
+    using type = nil;
+};
+
+// Get the list of elements before index `n` (excluded)
+template<int, typename...> struct BeforeIndex;
+template<int n, typename H, typename T>
+struct BeforeIndex<n, TList<H, T>>
+{
+    using type = TList<H, typename BeforeIndex<n-1, T>::type>;
+};
+template<typename H, typename T>
+struct BeforeIndex<0, TList<H, T>>
+{
+    using type = nil;
+};
+template<int n>
+struct BeforeIndex<n, nil>
+{
+    using type = nil;
+};
+
 //================== Useful info about the lists ====================
 // Tests whether the list is empty
 template<typename...> struct IsEmpty;
@@ -336,3 +372,4 @@ struct ElemIndex<nil, E>
 {
     static constexpr int value = 0;
 };
+

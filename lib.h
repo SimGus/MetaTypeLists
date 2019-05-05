@@ -173,3 +173,16 @@ struct Intersperse<nil, E>
     using type = nil;
 };
 
+// Transpose the rows and columns of the arguments
+template<typename...> struct Transpose;
+template<typename H1, typename T1, typename H2, typename T2>
+struct Transpose<TList<H1, T1>, TList<H2, T2>>
+{
+    using type = TList<TList<H1, TList<H2, nil>>, typename Transpose<T1, T2>::type>;
+};
+template<>
+struct Transpose<nil, nil>
+{
+    using type = nil;
+};
+

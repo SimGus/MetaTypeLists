@@ -8,7 +8,7 @@ int main()
 {
     using test = buildTList<int, char, double>;
     using test2 = buildTList<double, char, float>;
-    debug<Reverse<test>::type> d;
+    debug<Transpose<test, test2>::type> d;
     
     cout << "<int, char, double> length? " << Length<test>::value << endl;
     cout << "<> empty? " << Length<buildTList<>>::value << endl;

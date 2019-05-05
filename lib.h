@@ -160,3 +160,16 @@ struct Reverse<TList<H, nil>>
     using type = TList<H, nil>;
 };
 
+// Add an element in-between each elements of a list
+template<typename...> struct Intersperse;
+template<typename H, typename T, typename E>
+struct Intersperse<TList<H, T>, E>
+{
+    using type = TList<H, TList<E, typename Intersperse<T, E>::type>>;
+};
+template<typename E>
+struct Intersperse<nil, E>
+{
+    using type = nil;
+};
+

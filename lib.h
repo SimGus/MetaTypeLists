@@ -50,11 +50,11 @@ template<typename...> struct Head;
 template<typename H, typename T>
 struct Head<TList<H, T>>
 {
-    using value = H;
+    using type = H;
 };
 template<> struct Head<nil>
 {
-    using value = nil;
+    using type = nil;
 };
 
 // Get the type of the tail of the list
@@ -62,11 +62,24 @@ template<typename...> struct Tail;
 template<typename H, typename T>
 struct Tail<TList<H, T>>
 {
-    using value = T;
+    using type = T;
 };
 template<> struct Tail<nil>
 {
-    using value = nil;
+    using type = nil;
+};
+
+// Get the last element of the list
+template<typename...> struct Last;
+template<typename H, typename T>
+struct Last<TList<H, T>>
+{
+    using type = typename Last<T>::type;
+};
+template<typename H>
+struct Last<TList<H, nil>>
+{
+    using type = H;
 };
 
 

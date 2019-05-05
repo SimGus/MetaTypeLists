@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-    using test = buildTList<int, int>;
-    debug<Tail<test>::value> d;
+    using test = buildTList<int, char, double>;
+    debug<Last<test>::type> d;
 
     return EXIT_SUCCESS;
 }

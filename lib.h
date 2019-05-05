@@ -21,6 +21,7 @@
 
 using namespace std;
 
+//=================== Definitions ========================
 // Uninstantiable definition for debugging purposes
 template<typename> struct debug;
 
@@ -57,6 +58,7 @@ template<> struct Head<nil>
     using type = nil;
 };
 
+//=================== Getters for parts of the lists ===============
 // Get the type of the tail of the list
 template<typename...> struct Tail;
 template<typename H, typename T>
@@ -95,6 +97,7 @@ struct Init<TList<H, nil>>
     using type = nil;
 };
 
+//================== Useful info about the lists ====================
 // Tests whether the list is empty
 template<typename...> struct IsEmpty;
 template<typename H, typename T>
@@ -121,6 +124,7 @@ struct Length<nil>
     static constexpr unsigned int value = 0;
 };
 
+//==================== Different types of concatenation ===================
 // Concatenates two lists
 template<typename...> struct Concat;
 template<typename H1, typename T1, typename H2, typename T2>
@@ -147,6 +151,21 @@ struct Append<nil, E>
     using type = TList<E, nil>;
 };
 
+
+// Prepends an element to a list
+template<typename...> struct Prepend;
+template<typename H, typename T, typename E>
+struct Prepend<TList<H, T>, E>
+{
+    using type = TList<E, TList<H, T>>;
+};
+template<typename E>
+struct Prepend<nil, E>
+{
+    using type = TList<E, nil>;
+};
+
+//=================== Operations on lists ==============================
 // Creates a list obtained by applying a metafunction to all elements of the list
 template<template<typename...> typename, typename...> struct Map;
 template<template<typename...> typename f, typename H, typename T>
@@ -213,18 +232,6 @@ struct Transpose<nil, nil>
     using type = nil;
 };
 
-// Prepends an element to a list
-template<typename...> struct Prepend;
-template<typename H, typename T, typename E>
-struct Prepend<TList<H, T>, E>
-{
-    using type = TList<E, TList<H, T>>;
-};
-template<typename E>
-struct Prepend<nil, E>
-{
-    using type = TList<E, nil>;
-};
 
 /* // Special `Prepend` to use with `Map` */
 /* template<typename> struct PrependForMap; */
@@ -253,4 +260,62 @@ struct Prepend<nil, E>
 /* { */
 /*     using enumeration = nil; */
 /* }; */
+
+//+================== Predicates on lists =====================
+//------------------- Searching ----------------------------
+// Tests whether a type is in the list
+template<typename...> struct Elem;
+template<typename H, typename T>
+struct Elem<TList<H, T>, H>
+{
+    static constexpr bool value = true;
+};
+template<typename H, typename T, typename E>
+struct Elem<TList<H, T>, E>
+{
+    static constexpr bool value = Elem<T, E>::value;
+};
+template<typename E>
+struct Elem<nil, E>
+{
+    static constexpr bool value = false;
+};
+
+
+// Opposite of `Elem`
+template<typename...> struct NotElem;
+template<typename H, typename T>
+struct NotElem<TList<H, T>, H>
+{
+    static constexpr bool value = true;
+};
+template<typename H, typename T, typename E>
+struct NotElem<TList<H, T>, E>
+{
+    static constexpr bool value = NotElem<T, E>::value;
+};
+template<typename E>
+struct NotElem<nil, E>
+{
+    static constexpr bool value = false;
+};
+
+// Finds a provided type in the list and returns it (or `nil` if it isn't found)
+template<typename...> struct Find;
+template<typename H, typename T>
+struct Find<TList<H, T>, H>
+{
+    using type = H;
+};
+template<typename H, typename T, typename E>
+struct Find<TList<H, T>, E>
+{
+    using type = typename Find<T, E>::type;
+};
+template<typename E>
+struct Find<nil, E>
+{
+    using type = nil;
+};
+
 

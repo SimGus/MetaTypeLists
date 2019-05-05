@@ -378,6 +378,7 @@ template<typename... Types> buildTList<Types...> createList(Types... values)
 {
     buildTList<Types...> l;
     populate(l, values...);
+    cout << l.head << " aaaaa" << endl;
     return l;
 }
 
@@ -387,5 +388,18 @@ void populate(buildTList<H, Ts...> l, H value, Ts... values)
     l.head = value;
     if constexpr (sizeof...(values) > 0)
         populate(l.tail, values...);
+}
+
+template<typename L> void printList(L);
+template<typename H, typename T>
+void printList(TList<H, T> l)
+{
+    cout << l.head << " | ";
+    printList(l.tail);
+}
+template<>
+void printList(nil l)
+{
+    cout << "nil" << endl;
 }
 

@@ -14,6 +14,9 @@ int main()
     cout << "int in <double, char, float>: " << ElemIndex<test2, int>::value << endl;
 
     test l = createList(1, 'a', 0.35);
+    cout << l.head << endl;
+    printList(l);
+    // There seems to be a problem after calling `populate`
 
     return EXIT_SUCCESS;
 }

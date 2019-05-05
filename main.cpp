@@ -9,8 +9,8 @@ int main()
     using test = buildTList<int, char, double>;
     /* debug<Init<test>::type> d; */
     
-    cout << "<int, char, double> empty? " << IsEmpty<test>::ans << endl;
-    cout << "<> empty? " << IsEmpty<buildTList<>>::ans << endl;
+    cout << "<int, char, double> length? " << Length<test>::value << endl;
+    cout << "<> empty? " << Length<buildTList<>>::value << endl;
 
     return EXIT_SUCCESS;
 }

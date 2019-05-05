@@ -108,3 +108,17 @@ struct IsEmpty<nil>
     static constexpr bool ans = true;
 };
 
+// Computes the length of the list
+template<typename...> struct Length;
+template<typename H, typename T>
+struct Length<TList<H, T>>
+{
+    static constexpr unsigned int value = 1 + Length<T>::value;
+};
+template<>
+struct Length<nil>
+{
+    static constexpr unsigned int value = 0;
+};
+
+

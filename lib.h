@@ -148,15 +148,15 @@ struct Append<nil, E>
 };
 
 // Reverse the order of the list
-/* template<typename...> struct Reverse; */
-/* template<typename H, typename T> */
-/* struct Reverse<TList<H, T>> */
-/* { */
-/*     using type = */ 
-/* }; */
-/* template<typename H> */
-/* struct Reverse<TList<H, nil>> */
-/* { */
-/*     using type = TList<H, nil>; */
-/* }; */
+template<typename...> struct Reverse;
+template<typename H, typename T>
+struct Reverse<TList<H, T>>
+{
+    using type = typename Append<typename Reverse<T>::type, H>::type;
+};
+template<typename H>
+struct Reverse<TList<H, nil>>
+{
+    using type = TList<H, nil>;
+};
 

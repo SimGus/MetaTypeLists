@@ -378,7 +378,6 @@ template<typename... Types> buildTList<Types...> createList(Types... values)
 {
     buildTList<Types...> l;
     populate(l, values...);
-    cout << l.head << " aaaaa" << endl;
     return l;
 }
 
